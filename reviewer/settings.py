@@ -27,7 +27,7 @@ environ.Env.read_env()
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['deep-reviewer.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
