@@ -1,0 +1,1 @@
+web: gunicorn reviever.wsgi --log-file -
