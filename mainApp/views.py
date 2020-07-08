@@ -28,9 +28,9 @@ def predict(request):
     list_sentences_test = temp
     list_tokenized_test = tokenizer.texts_to_sequences(list_sentences_test)
     X_te = pad_sequences(list_tokenized_test, maxlen=maxlen)
-    sentem = model.predict(X_te)[0,0]
+    sentem = model.predict(X_te)
     mark = model2.predict(X_te)
 
-    context = {'sentem': sentem, 'mark': np.argmax(mark[0,:])+1, 'review': temp[0]}
+    context = {'sentem': sentem[0,0], 'mark': np.argmax(mark[0,:])+1, 'review': temp[0]}
 
     return render(request, 'index.html', context)
