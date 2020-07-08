@@ -1,36 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
-from tensorflow import keras
 import numpy as np
 import pandas as pd
-import re
-from nltk.stem import WordNetLemmatizer
-from nltk.corpus import stopwords
-from keras.preprocessing.text import Tokenizer
-from keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.models import load_model
 
-df = pd.read_csv('./models/imdb_master.zip', encoding="latin-1")
-
-df = df[df.type == 'train']
-df.drop(['type'], axis = 1, inplace=True)
-df = df.drop(['Unnamed: 0'], axis=1)
-df = df[df.label != 'unsup']
-df = df.drop(['file'],axis=1)
-
-stop_words = set(stopwords.words("english")) 
-lemmatizer = WordNetLemmatizer()
-
-def clean_text(text):
-    text = re.sub(r'[^\w\s]','',text, re.UNICODE)
-    text = text.lower()
-    text = [lemmatizer.lemmatize(token) for token in text.split(" ")]
-    text = [lemmatizer.lemmatize(token, "v") for token in text]
-    text = [word for word in text if not word in stop_words]
-    text = " ".join(text)
-    return text
-
-df['review'] = df.review.apply(lambda x: clean_text(x))
+df = pd.read_csv('./models/imdb_clean.zip')
 
 max_features = 6000
 tokenizer = Tokenizer(num_words=max_features)
@@ -38,8 +14,8 @@ tokenizer.fit_on_texts(df['review'])
 
 maxlen = 370
 
-model = keras.models.load_model('./models/sentem_model.h5')
-model2 = keras.models.load_model('./models/mark_model.h5')
+model = load_model('./models/sentem_model.h5')
+model2 = load_model('./models/mark_model.h5')
 
 def home(request):
     return render(request, 'index.html')
