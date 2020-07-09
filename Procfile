@@ -1,1 +1,1 @@
-web: gunicorn reviever.wsgi --log-file -
+web: gunicorn reviewer.wsgi --log-file -
