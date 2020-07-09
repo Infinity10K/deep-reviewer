@@ -19,11 +19,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-import environ
-env = environ.Env(
+
+env = os.environ.Env(
     DEBUG=(bool, False)
 )
-environ.Env.read_env()
+os.environ.Env.read_env()
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
 
