@@ -40,8 +40,8 @@ def home(request):
 
 def predict(request):
     temp = [request.POST.get('text')]
-    temp = [clean_text(temp[0])]
-    list_sentences_test = temp
+    test = [clean_text(temp[0])]
+    list_sentences_test = test
     list_tokenized_test = tokenizer.texts_to_sequences(list_sentences_test)
     X_te = pad_sequences(list_tokenized_test, maxlen=maxlen)
     sentem = model.predict(X_te)
