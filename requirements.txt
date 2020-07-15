@@ -1,8 +1,8 @@
-﻿absl-py==0.9.0
+absl-py==0.9.0
 Django==3.0.8
-gunicorn==20.0.4
+nltk==3.5
 numpy==1.19.0
 pandas==1.0.5
 scipy==1.4.1
-tensorflow==2.0.1
+tensorflow==2.0.0
 whitenoise==5.1.0
